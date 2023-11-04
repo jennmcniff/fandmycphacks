@@ -31,8 +31,9 @@ def main():
     pd.set_option('display.max_columns', None)
 
 
+    
+    df.to_json('data.json', orient='records', lines=True, date_format='iso', default_handler=str)
 
-    picked_course = 23144
 
 
     #print(index)

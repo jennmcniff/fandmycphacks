@@ -30,7 +30,17 @@ def main():
     pd.set_option('display.max_rows', None)
     pd.set_option('display.max_columns', None)
 
-    print(df)
+
+
+    picked_course = 23144
+
+
+    #print(index)
+
+    #courses_to_remove = time_conflict_mapping[df.loc[index, 'TimeSlot']]
+
+    
+
 
 
 

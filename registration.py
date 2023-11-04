@@ -59,6 +59,36 @@ def keyWordSearch():
     #print(courseList)
     return courseList
 
+def update_dataframe(df, picked_course):
+    time_conflict_mapping = [
+    [0],
+    [1, 2, 3],
+    [2, 1, 3, 4],
+    [3, 1, 2, 4],
+    [4, 2, 3],
+    [5, 6],
+    [6, 5, 7],
+    [7, 6, 8],
+    [8, 7],
+    [9],
+    [10]
+    ]
+        
+    i = df[df['Course Code'] == picked_course]
+    t_slot = i.iloc[0]['TimeSlot']
+
+    time_slots_to_remove = time_conflict_mapping[t_slot]
+
+    filtered_df = df[~df['TimeSlot'].isin(time_slots_to_remove)]
+
+    filtered_df = filtered_df.reset_index(drop=True)
+
+
+
+    return filtered_df
+
+
+
 def parseResults(potentialCourses):
     #STREAMLIT: clickable list &
     print("select a potential course")

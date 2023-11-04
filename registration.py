@@ -35,7 +35,8 @@ def readCSV(file_path):
 
 #performs keyword search on dataset
 def keyWordSearch():
-    #STREAMLIT: textbox
+    #STREAMLIT: textbox & enter
+    st.text_input(label="Keyword Search",placeholder="Enter three keywords")
     keyWords = str(input("Enter three keywords: "))
     #
     keyList = list(keyWords.split(" "))
@@ -59,15 +60,20 @@ def keyWordSearch():
     return courseList
 
 def parseResults(potentialCourses):
-    #STREAMLIT
+    #STREAMLIT: clickable list &
     print("select a potential course")
     for each in potentialCourses:
         print(each)
     #
     #user select course
 
+def buildDisplay():
+    #STREAMLIT: calendar display
+    print('.')
+
 
 def main():
+    readCSV("csdata.csv")
     potentialCourses = keyWordSearch()
     parseResults(potentialCourses)
 

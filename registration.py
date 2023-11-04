@@ -62,6 +62,7 @@ def keyWordSearch():
 def parseResults(potentialCourses):
     #STREAMLIT: clickable list &
     print("select a potential course")
+    #
     for each in potentialCourses:
         print(each)
     #

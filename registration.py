@@ -91,8 +91,8 @@ def buildDisplay():
 
 
 def main():
-    readCSV("csdata.csv")
-    potentialCourses = keyWordSearch()
+    df = readCSV("csdata.csv")
+    potentialCourses = keyWordSearch(df)
     parseResults(potentialCourses)
 
 

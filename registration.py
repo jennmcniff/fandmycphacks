@@ -36,8 +36,8 @@ def readCSV(file_path):
 #performs keyword search on dataset
 def keyWordSearch():
     #STREAMLIT: textbox & enter
-    st.text_input(label="Keyword Search",placeholder="Enter three keywords")
-    keyWords = str(input("Enter three keywords: "))
+    keyWords = st.text_input(label="Keyword Search",placeholder="Enter three keywords")
+    #keyWords = str(input("Enter three keywords: "))
     #
     keyList = list(keyWords.split(" "))
     #vv csv data source file vv

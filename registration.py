@@ -85,8 +85,11 @@ def display_list(list):
     built = builder.build()
     # st.dataframe(AGlist)
     return_value = AgGrid(AGlist,built)
+    #https://discuss.streamlit.io/t/how-to-keep-streamlit-ag-grid-selected-rows-after-page-update/38611/2
     if return_value['selected_rows']:
-        print(return_value)
+        temp = return_value['selected_rows']
+        print(return_value['selected_rows'])
+        print(temp[0]['Course Code'])
 
 
 def parseResults(collection):
@@ -97,7 +100,6 @@ def parseResults(collection):
     #moemen
     kws = keyWordSearch(collection)
     if (kws == list()):
-    #vv csv data source file vv
         display_list(list(collection.find({},{ "_id": 0, "Course Code": 1, "Class":1, "Title": 1, "Days" : 1, "Time": 1, "Instructor": 1})))
         #st.dataframe(list(collection.find({},{ "_id": 0, "Course Code": 1, "Class":1, "Title": 1, "Days" : 1, "Time": 1, "Instructor": 1})))
     else:

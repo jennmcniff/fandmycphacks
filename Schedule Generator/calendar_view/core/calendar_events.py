@@ -186,7 +186,7 @@ class CalendarEvents(object):
 
         # print notes
         if notes_metadata.visible:
-            y_text_offset: int = 0  # draw the notes right after the title
+            y_text_offset: int = 0 # draw the notes right after the title
             if not title_metadata.visible:
                 # if the title is not visible, calculate the top-left position of the notes multiline text block
                 y_text_offset = EventDrawHelper.calculate_text_y_position_offset(self.config.title_vertical_align,
@@ -195,7 +195,8 @@ class CalendarEvents(object):
                                                                                  total_text_height=total_height)
             # the top-left position of the notes block
             notes_pos: Tuple[int, int] = (
-                p1[0] + style.event_padding,
+                (p1[0] + p2[0]) / 2 - notes_metadata.size[0] / 2,
+                # p1[0] + style.event_padding,
                 y_top_offset + y_text_offset
             )
             self.event_draw.multiline_text(notes_pos, notes_metadata.text, align='left',

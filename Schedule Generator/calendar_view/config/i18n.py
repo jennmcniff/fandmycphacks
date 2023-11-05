@@ -1,12 +1,12 @@
 day_of_week_i18n = {
     'en': [
-        'Mo',
-        'Tu',
-        'We',
-        'Th',
-        'Fr',
-        'Sa',
-        'Su'
+        'Monday',
+        'Tuesday',
+        'Wednesday',
+        'Thursday',
+        'Friday',
+        'Saturday',
+        'Sunday'
     ],
     'ru': [
         'Пн',

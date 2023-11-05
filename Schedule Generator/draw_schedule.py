@@ -2,9 +2,11 @@ from calendar_view.calendar import Calendar
 from calendar_view.core import data
 from calendar_view.core.event import EventStyles
 
+import pandas as pd
+
 config = data.CalendarConfig(
     lang='en',
-    title='Test Schedule',
+    title='Your Course Schedule',
     dates='Mo - Fr',
     hours='8 - 22',
     mode=None,
@@ -12,18 +14,18 @@ config = data.CalendarConfig(
     show_year=False,
     legend=False,
 )
-
+df = pd.read_csv("csdata.csv")
 color_list = [EventStyles.RED, EventStyles.BLUE, EventStyles.YELLOW, EventStyles.PINK, EventStyles.GRAY]
 
 calendar = Calendar.build(config)
-courses = [["23140","CS101.102","Fund Comp Sci I","3.00","LEC","T R","09:30AM-10:45AM","KEC 119","Kambhampaty K",'12','1','01/25/24-05/09/24'], 
-           ["23149","CS360.102","Analysis/Algorithms","3.00","LEC","M W F",'08:00AM-08:50AM',"KEC 119","Zeller D","12",'0','01/25/24-05/09/24'], 
-           ["23145","CS320.102","Software Eng/Desgn","3.00","LEC","M W F",'01:00PM-01:50PM',"KEC 119","Hake D","10","2","01/25/24-05/09/24"], 
-           ['23147','CS335.101','Cybersecurity Analy & Appl','3.00','LEC','T R','06:00PM-07:15PM','KEC 123','Zhelezov G','20','7','01/25/24-05/09/24']]
+courses = [["23140","CS101.102","Fund Comp Sci I","T R","09:30AM-10:45AM","KEC 119","Kambhampaty K",'12','1','01/25/24-05/09/24'], 
+           ["23149","CS360.102","Analysis/Algorithms","M W F",'08:00AM-08:50AM',"KEC 119","Zeller D","12",'0','01/25/24-05/09/24'], 
+           ["23145","CS320.102","Software Eng/Desgn","M W F",'01:00PM-01:50PM',"KEC 119","Hake D","10","2","01/25/24-05/09/24"], 
+           ['23147','CS335.101','Cybersecurity Analy & Appl','T R','06:00PM-07:15PM','KEC 123','Zhelezov G','20','7','01/25/24-05/09/24']]
 
 for i in range (len(courses)):
-    days = courses[i][5].split()
-    times = courses[i][6].split('-')
+    days = courses[i][3].split()
+    times = courses[i][4].split('-')
     course_title = courses[i][1]
     course_name = courses[i][2]
     for j in range(2):
@@ -43,6 +45,6 @@ for i in range (len(courses)):
             day = 3
         if day == 'F':
             day = 4
-        calendar.add_event(day_of_week= day, start=times[0][:5], end=times[1][:5], title=course_title, style=color_list[i])
+        calendar.add_event(day_of_week= day, start=times[0][:5], end=times[1][:5], title=course_title,notes = course_name, style=color_list[i])
         
 calendar.save("test_schedule.png")

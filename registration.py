@@ -1,12 +1,20 @@
 import streamlit as st
 import pandas as pd
-import csv
+import pymongo as db
 
 #implementing w/o streamlit, will encorporate streamlit later
-st.title('CourseWise')
+
+client = db.MongoClient('mongodb://localhost:27017/')
+
+mydb = client['CW']
+
+collection = mydb['Courses_Keywords']
 
 #read all course data from a csv file
 def readCSV(file_path):
+    collection.delete_many({})
+
+    df = pd.read_csv(file_path)
 
     time_slot_mapping = [
     ["08:00AM-08:50AM", 0],
@@ -23,30 +31,27 @@ def readCSV(file_path):
     ]
 
     time_slot_dict = dict(time_slot_mapping)
-
-    df = pd.read_csv(file_path)
-    
     def map_time_to_number(time_str):
         return time_slot_dict.get(time_str, -1)
-    
-
     df['TimeSlot'] = df['Time'].apply(map_time_to_number)
 
-    return df
+    data = df.to_dict(orient='records')
+    collection.insert_many(data)
 
 #performs keyword search on dataset
-def keyWordSearch(df):
+def keyWordSearch():
     #STREAMLIT: textbox & enter
     keyWords = st.text_input(label="Keyword Search",placeholder="Enter three keywords")
     #
     keyList = list(keyWords.split(" "))
     #vv csv data source file vv
-    filtered_df = df[~df['KeyWords'].isin(keyList)]
-    filtered_df = filtered_df.reset_index(drop=True)
+    filter = {'KeyWords': {'$nin': keyList}}
+    update = {'$set': {'hidden': True}}
+    collection.update_many(filter, update)
 
-    return filtered_df
 
-def update_dataframe(df, picked_course):
+
+def update_dataframe(picked_course):
     time_conflict_mapping = [
     [0],
     [1, 2, 3],
@@ -61,18 +66,16 @@ def update_dataframe(df, picked_course):
     [10]
     ]
         
-    i = df[df['Course Code'] == picked_course]
-    t_slot = i.iloc[0]['TimeSlot']
+    filter = {'Course Code': picked_course}
+    result = collection.find_one(filter)
+
+    t_slot = result["TimeSlot"]
 
     time_slots_to_remove = time_conflict_mapping[t_slot]
 
-    filtered_df = df[~df['TimeSlot'].isin(time_slots_to_remove)]
-
-    filtered_df = filtered_df.reset_index(drop=True)
-
-
-
-    return filtered_df
+    filter = {'TimeSlot': {'$in': time_slots_to_remove}}
+    update = {'$set': {'hidden': True}}
+    collection.update_many(filter, update)
 
 
 
@@ -94,8 +97,8 @@ def buildDisplay():
 
 def main():
     df = readCSV("csdata.csv")
-    potentialCourses = keyWordSearch(df)
-    parseResults(potentialCourses)
+    keyWordSearch()
+    #parseResults(34444)
 
 
 main()

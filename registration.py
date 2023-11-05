@@ -4,10 +4,14 @@ import pymongo as db
 
 #implementing w/o streamlit, will encorporate streamlit later
 
+client = db.MongoClient('mongodb://localhost:27017/')
 
+mydb = client['CW']
+
+collection = mydb['Courses_Keywords']
 
 #read all course data from a csv file
-def readCSV(file_path, collection):
+def readCSV(file_path):
     collection.delete_many({})
 
     df = pd.read_csv(file_path)
@@ -35,19 +39,19 @@ def readCSV(file_path, collection):
     collection.insert_many(data)
 
 #performs keyword search on dataset
-def keyWordSearch(collection):
+def keyWordSearch():
     #STREAMLIT: textbox & enter
     keyWords = st.text_input(label="Keyword Search",placeholder="Enter three keywords")
     #
     keyList = list(keyWords.split(" "))
     #vv csv data source file vv
-    filter = {'KeyWords': {'$nin': keyList}}
-    update = {'$set': {'hidden': True}}
-    collection.update_many(filter, update)
+    filtered_df = df[~df['KeyWords'].isin(keyList)]
+    filtered_df = filtered_df.reset_index(drop=True)
 
+    #print(courseList)
+    return filtered_df
 
-
-def update_dataframe(picked_course, collection):
+def update_dataframe(picked_course):
     time_conflict_mapping = [
     [0],
     [1, 2, 3],
@@ -92,13 +96,9 @@ def buildDisplay():
 
 
 def main():
-    client = db.MongoClient('mongodb://localhost:27017/')
-    mydb = client['CW']
-    collection = mydb['Courses_Keywords']
-
-    readCSV("csdata.csv", collection)
+    df = readCSV("csdata.csv")
     keyWordSearch()
     #parseResults(34444)
 
-    client.close()
+
 main()

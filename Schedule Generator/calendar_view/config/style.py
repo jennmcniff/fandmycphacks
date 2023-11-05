@@ -23,10 +23,10 @@ title_padding_right = 30
 title_padding_top = 30
 title_padding_bottom = 20
 
-hour_number_font = image_font(22)
+hour_number_font = image_font(30)
 hour_number_color = 'black'
 
-day_of_week_font = image_font(28)
+day_of_week_font = image_font(39)
 day_of_week_color = 'black'
 
 line_day_color = (150, 150, 150, 255)
@@ -42,12 +42,12 @@ event_fill_default = (196, 234, 188, 210)
 event_title_font = image_font(36)
 event_title_color = 'black'
 event_notes_font = image_font(26)
-event_notes_color = 'gray'
+event_notes_color = 'black'
 event_padding: int = 20
 event_title_margin: int = 20
 
 legend_spacing = 20
-legend_padding_top = 40
+legend_padding_top = 20
 legend_padding_bottom = 70
 legend_padding_left = 70
 legend_padding_right = 40

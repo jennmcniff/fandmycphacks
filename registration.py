@@ -96,9 +96,14 @@ def buildDisplay():
 
 
 def main():
-    df = readCSV("csdata.csv")
-    keyWordSearch()
-    #parseResults(34444)
+    atlas_uri = "mongodb+srv://moemen:mongodb@ycp.2b6vs8k.mongodb.net/test?retryWrites=true&w=majority"
+    client = db.MongoClient(atlas_uri)
+    mydb = client['CW']
+    collection = mydb['Courses_Keywords']
+
+    readCSV("csdata.csv", collection)
+    keyWordSearch(collection)
+    #parseResults()
 
 
 main()

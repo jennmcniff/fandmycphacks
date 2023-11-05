@@ -78,14 +78,8 @@ def update_dataframe(picked_course, collection):
     filter = {'TimeSlot': {'$in': time_slots_to_remove}}
     collection.delete_many(filter)
 
-
-
-def parseResults(collection):
-    #STREAMLIT: clickable list &
-    st.write('Results:')
-    # AgGrid(collection)
-    # df = pd.DataFrame(list(tweets.find()))
-    AGlist = pd.DataFrame(list(collection.find({},{ "_id": 0, "Course Code": 1, "Class":1, "Title": 1, "Days" : 1, "Time": 1, "Instructor": 1})))
+def display_list(list):
+    AGlist = pd.DataFrame(list)
     builder = GridOptionsBuilder.from_dataframe(AGlist)
     builder.configure_selection('multiple', use_checkbox=True)
     built = builder.build()
@@ -93,14 +87,21 @@ def parseResults(collection):
     return_value = AgGrid(AGlist,built)
     if return_value['selected_rows']:
         print(return_value)
-    
+
+
+def parseResults(collection):
+    #STREAMLIT: clickable list &
+    st.write('Results:')
+    # AgGrid(collection)
+    # df = pd.DataFrame(list(tweets.find()))
     #moemen
     kws = keyWordSearch(collection)
     if (kws == list()):
     #vv csv data source file vv
-        st.dataframe(list(collection.find({},{ "_id": 0, "Course Code": 1, "Class":1, "Title": 1, "Days" : 1, "Time": 1, "Instructor": 1})))
+        display_list(list(collection.find({},{ "_id": 0, "Course Code": 1, "Class":1, "Title": 1, "Days" : 1, "Time": 1, "Instructor": 1})))
+        #st.dataframe(list(collection.find({},{ "_id": 0, "Course Code": 1, "Class":1, "Title": 1, "Days" : 1, "Time": 1, "Instructor": 1})))
     else:
-        st.dataframe(kws)
+        display_list(kws)
     
     #
     #

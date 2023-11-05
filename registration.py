@@ -52,9 +52,8 @@ def keyWordSearch(collection):
     return list()
     #
     
-
-
 def update_dataframe(picked_course, collection):
+    print('CRN: ', str(picked_course))
     filter = {'Course Code': picked_course}
     result = collection.find_one(filter)
     
@@ -96,26 +95,24 @@ def update_dataframe(picked_course, collection):
     filter = {'TimeSlot': {'$in': time_slots_to_remove}}
     collection.delete_many(filter)
 
-def display_list(list):
+def display_list(list, collection):
     AGlist = pd.DataFrame(list)
     builder = GridOptionsBuilder.from_dataframe(AGlist)
     builder.configure_selection('multiple', use_checkbox=True)
     built = builder.build()
     # st.dataframe(AGlist)
     return_value = AgGrid(AGlist,built)
+    
     #https://discuss.streamlit.io/t/how-to-keep-streamlit-ag-grid-selected-rows-after-page-update/38611/2
     if return_value['selected_rows']:
         temp = return_value['selected_rows']
-        print(return_value['selected_rows'])
-        # print(temp[0]['Course Code'])
-        update_dataframe(temp[-1]['Course Code'], list)
-    # courses = [["23140","CS101.102","Fund Comp Sci I","T R","09:30AM-10:45AM","KEC 119","Kambhampaty K",'12','1','01/25/24-05/09/24'], 
-            # ["23149","CS360.102","Analysis/Algorithms","M W F",'08:00AM-08:50AM',"KEC 119","Zeller D","12",'0','01/25/24-05/09/24'], 
-            # ["23145","CS320.102","Software Eng/Desgn","M W F",'01:00PM-01:50PM',"KEC 119","Hake D","10","2","01/25/24-05/09/24"], 
-            # ['23147','CS335.101','Cybersecurity Analy & Appl','T R','06:00PM-07:15PM','KEC 123','Zhelezov G','20','7','01/25/24-05/09/24']]
+        # print(return_value['selected_rows'])
+        print(temp[0])
+        update_dataframe(temp[0]['Course Code'], collection)
+   
     submit = st.button("Submit")
     if submit:
-        draw_schedule.draw(courses)
+        draw_schedule.draw(return_value['selected_rows'])
         st.image("Your_Course_Schedule.png")
         with open("Your_Course_Schedule.png", "rb") as file:
             dwnld = st.download_button(
@@ -137,7 +134,7 @@ def parseResults(collection):
         display_list(list(collection.find({},{ "_id": 0, "Course Code": 1, "Class":1, "Title": 1, "Days" : 1, "Time": 1, "Instructor": 1})))
         #st.dataframe(list(collection.find({},{ "_id": 0, "Course Code": 1, "Class":1, "Title": 1, "Days" : 1, "Time": 1, "Instructor": 1})))
     else:
-        display_list(kws)
+        display_list(kws, collection)
     
     
         
@@ -156,7 +153,7 @@ def main():
     mydb = client['CW']
     collection = mydb['Courses_Keywords']
     collection.delete_many({})
-
+    st.header("CourseWise")
     readCSV("csdata.csv", collection)
     #keyWordSearch(collection)
     keyList = ["oral"]

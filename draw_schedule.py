@@ -21,7 +21,7 @@ def draw(courses):
     for i in range (len(courses)):
         days = courses[i][3].split()
         times = courses[i][4].split('-')
-        course_title = courses[i][1] + " (" + courses[i][0] + ")"
+        course_title = courses[i][1] + " (" + str(courses[i][0]) + ")"
         course_name = courses[i][2]
         for j in range(2):
             if ("PM" in times[j]) and ("12:" not in times[j]):

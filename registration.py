@@ -96,7 +96,7 @@ def update_dataframe(picked_course, collection):
 
 
 
-def display_list(list):
+def display_list(list, collection):
     AGlist = pd.DataFrame(list)
     builder = GridOptionsBuilder.from_dataframe(AGlist)
     builder.configure_selection('multiple',use_checkbox=True)
@@ -116,7 +116,7 @@ def display_list(list):
         print(selected)
         #print(selected)
         # print(temp[0]['Course Code'])
-        update_dataframe(temp[-1]['Course Code'], list)
+        update_dataframe(temp[-1]['Course Code'], collection)
 
 
     courses = [["23140","CS101.102","Fund Comp Sci I","T R","09:30AM-10:45AM","KEC 119","Kambhampaty K",'12','1','01/25/24-05/09/24'], 
@@ -125,7 +125,7 @@ def display_list(list):
             ['23147','CS335.101','Cybersecurity Analy & Appl','T R','06:00PM-07:15PM','KEC 123','Zhelezov G','20','7','01/25/24-05/09/24']]
     submit = st.button("Submit")
     if submit:
-        draw_schedule.draw(courses)
+        draw_schedule.draw(return_value['selected_rows'])
         st.image("Your_Course_Schedule.png")
         with open("Your_Course_Schedule.png", "rb") as file:
             dwnld = st.download_button(
@@ -155,10 +155,10 @@ def parseResults(collection):
     #moemen
     kws = keyWordSearch(collection)
     if (kws == list()):
-        display_list(list(collection.find({},{ "_id": 0, "Course Code": 1, "Class":1, "Title": 1, "Days" : 1, "Time": 1, "Instructor": 1})))
+        display_list(list(collection.find({},{ "_id": 0, "Course Code": 1, "Class":1, "Title": 1, "Days" : 1, "Time": 1, "Instructor": 1})), collection)
         #st.dataframe(list(collection.find({},{ "_id": 0, "Course Code": 1, "Class":1, "Title": 1, "Days" : 1, "Time": 1, "Instructor": 1})))
     else:
-        display_list(kws)
+        display_list(kws, collection)
     
     
         

@@ -8,7 +8,6 @@ import pymongo as db
 
 #read all course data from a csv file
 def readCSV(file_path, collection):
-    collection.delete_many({})
 
     df = pd.read_csv(file_path)
 
@@ -105,6 +104,7 @@ def main():
     client = db.MongoClient(atlas_uri)
     mydb = client['CW']
     collection = mydb['Courses_Keywords']
+    collection.delete_many({})
 
     readCSV("csdata.csv", collection)
     #keyWordSearch(collection)

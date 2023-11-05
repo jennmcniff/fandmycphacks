@@ -3,6 +3,7 @@ import pandas as pd
 import pymongo as db
 from st_aggrid import AgGrid
 from st_aggrid import GridOptionsBuilder
+import draw_schedule
 
 #implementing w/o streamlit, will encorporate streamlit later
 
@@ -53,22 +54,39 @@ def keyWordSearch(collection):
 
 
 def update_dataframe(picked_course, collection):
-    time_conflict_mapping = [
-    [0],
-    [1, 2, 3],
-    [2, 1, 3, 4],
-    [3, 1, 2, 4],
-    [4, 2, 3],
-    [5, 6],
-    [6, 5, 7],
-    [7, 6, 8],
-    [8, 7],
-    [9],
-    [10]
-    ]
-        
     filter = {'Course Code': picked_course}
     result = collection.find_one(filter)
+    
+    course_days = result["Days"]
+    time_conflict_mapping = []
+    if course_days == 'M W F' or course_days == 'M W':
+        time_conflict_mapping = [
+        [0], # MWF 08:00AM-08:50AM
+        [1, 2], # MWF 09:00AM-09:50AM. Removed 3
+        [2, 1, 4],# MW 09:00AM-10:15AM. Removed 3
+        [3],# TR 09:30AM-10:45AM. Removed 1, 2, 4
+        [4, 2],# MWF 10:00AM-10:50AM. Removed 3
+        [5, 6], # MWF MW 11:00AM-12:15PM
+        [6, 5], # W 12:00PM-12:50PM. Removed 7
+        [7],# TR 12:30PM-01:45PM. Removed 6, 8
+        [8], # MWF 01:00PM-01:50PM. Removed 7
+        [9], # MWF 02:00PM-02:50PM
+        [10] # TR 06:00PM-07:15PM
+        ]
+    else:
+        time_conflict_mapping = [
+        [0], # MWF 08:00AM-08:50AM
+        [1, 2], # MWF 09:00AM-09:50AM. Removed 3
+        [2, 1, 4],# MW 09:00AM-10:15AM. Removed 3
+        [3],# TR 09:30AM-10:45AM. Removed 1, 2, 4
+        [4, 2],# MWF 10:00AM-10:50AM. Removed 3
+        [5], # TR 11:00AM-12:15PM. Removed 6
+        [6], # W 12:00PM-12:50PM. Removed 5, 7
+        [7],# TR 12:30PM-01:45PM. Removed 6, 8
+        [8], # MWF 01:00PM-01:50PM. Removed 7
+        [9], # MWF 02:00PM-02:50PM
+        [10] # TR 06:00PM-07:15PM
+        ]
 
     t_slot = result["TimeSlot"]
 
@@ -77,7 +95,7 @@ def update_dataframe(picked_course, collection):
     filter = {'TimeSlot': {'$in': time_slots_to_remove}}
     collection.delete_many(filter)
 
-submit = st.button("Submit")
+
 pickedOut = list()
 
 def display_list(list):
@@ -98,7 +116,24 @@ def display_list(list):
         print(temp[0]['Course Code'])
         selected.append([temp[-1]['Course Code'], temp[-1]['Class'],temp[-1]['Title'],temp[-1]['Days'],temp[-1]['Time'],temp[-1]['Instructor']])
         print(selected)
-    print(selected)
+        #print(selected)
+        # print(temp[0]['Course Code'])
+        update_dataframe(temp[-1]['Course Code'], list)
+    courses = [["23140","CS101.102","Fund Comp Sci I","T R","09:30AM-10:45AM","KEC 119","Kambhampaty K",'12','1','01/25/24-05/09/24'], 
+            ["23149","CS360.102","Analysis/Algorithms","M W F",'08:00AM-08:50AM',"KEC 119","Zeller D","12",'0','01/25/24-05/09/24'], 
+            ["23145","CS320.102","Software Eng/Desgn","M W F",'01:00PM-01:50PM',"KEC 119","Hake D","10","2","01/25/24-05/09/24"], 
+            ['23147','CS335.101','Cybersecurity Analy & Appl','T R','06:00PM-07:15PM','KEC 123','Zhelezov G','20','7','01/25/24-05/09/24']]
+    submit = st.button("Submit")
+    if submit:
+        draw_schedule.draw(courses)
+        st.image("Your_Course_Schedule.png")
+        with open("Your_Course_Schedule.png", "rb") as file:
+            dwnld = st.download_button(
+                    label="Download schedule",
+                    data=file,
+                    file_name="Your_Course_Schedule.png",
+                    mime="image/png"
+                )
 
     if submit:
         for each in return_value['selected_rows']:
@@ -125,6 +160,8 @@ def parseResults(collection):
     else:
         display_list(kws)
     
+    
+        
     #
     #
     #user select course

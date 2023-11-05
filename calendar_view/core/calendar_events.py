@@ -320,7 +320,7 @@ class EventDrawHelper:
         if vertical_align == 'top':
             return 0
         if vertical_align == 'center':
-            return int(box_height / 2 - text_height / 2)
+            return int(box_height / 2 - total_text_height / 2)
         if vertical_align == 'bottom':
             return max(0, box_height - total_text_height)
         raise RuntimeError(f'Wrong vertical align value: {vertical_align}')

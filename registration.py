@@ -77,7 +77,9 @@ def update_dataframe(picked_course, collection):
 
 def parseResults(potentialCourses):
     #STREAMLIT: clickable list &
-    print("select a potential course")
+    st.write('Results:')
+    st.dataframe(potentialCourses)
+    
     #
     for each in potentialCourses:
         print(each)

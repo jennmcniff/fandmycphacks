@@ -11,7 +11,7 @@ mydb = client['CW']
 collection = mydb['Courses_Keywords']
 
 #read all course data from a csv file
-def readCSV(file_path):
+def readCSV(file_path, collection):
     collection.delete_many({})
 
     df = pd.read_csv(file_path)

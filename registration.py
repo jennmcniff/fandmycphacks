@@ -3,6 +3,7 @@ import pandas as pd
 import csv
 
 #implementing w/o streamlit, will encorporate streamlit later
+st.title('CourseWise')
 
 #read all course data from a csv file
 def readCSV(file_path):
@@ -43,7 +44,6 @@ def keyWordSearch(df):
     filtered_df = df[~df['KeyWords'].isin(keyList)]
     filtered_df = filtered_df.reset_index(drop=True)
 
-    #print(courseList)
     return filtered_df
 
 def update_dataframe(df, picked_course):
@@ -78,7 +78,9 @@ def update_dataframe(df, picked_course):
 
 def parseResults(potentialCourses):
     #STREAMLIT: clickable list &
-    print("select a potential course")
+    st.write('Results:')
+    st.dataframe(potentialCourses)
+    
     #
     for each in potentialCourses:
         print(each)

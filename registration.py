@@ -75,14 +75,13 @@ def update_dataframe(picked_course, collection):
 
 
 
-def parseResults(potentialCourses):
+def parseResults(collection):
     #STREAMLIT: clickable list &
     st.write('Results:')
-    st.dataframe(potentialCourses)
+    st.dataframe(list(collection.find({},{ "_id": 0, "Course Code": 1, "Class":1, "Title": 1, "Days" : 1, "Time": 1, "Instructor": 1})))
+\
     
     #
-    for each in potentialCourses:
-        print(each)
     #
     #user select course
 
@@ -98,8 +97,8 @@ def main():
     collection = mydb['Courses_Keywords']
 
     readCSV("csdata.csv", collection)
-    keyWordSearch(collection)
-    #parseResults()
+    #keyWordSearch(collection)
+    parseResults(collection)
 
     client.close()
 main()

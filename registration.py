@@ -6,7 +6,7 @@ from st_aggrid import GridOptionsBuilder
 
 #implementing w/o streamlit, will encorporate streamlit later
 
-
+selected = list()
 
 #read all course data from a csv file
 def readCSV(file_path, collection):
@@ -49,8 +49,7 @@ def keyWordSearch(collection):
         return serached
     
     return list()
-    #
-    
+
 
 
 def update_dataframe(picked_course, collection):
@@ -78,19 +77,40 @@ def update_dataframe(picked_course, collection):
     filter = {'TimeSlot': {'$in': time_slots_to_remove}}
     collection.delete_many(filter)
 
+submit = st.button("Submit")
+pickedOut = list()
+
 def display_list(list):
     AGlist = pd.DataFrame(list)
     builder = GridOptionsBuilder.from_dataframe(AGlist)
-    builder.configure_selection('multiple', use_checkbox=True)
+    builder.configure_selection(use_checkbox=True)
     built = builder.build()
     # st.dataframe(AGlist)
+    
     return_value = AgGrid(AGlist,built)
+    print(selected)
     #https://discuss.streamlit.io/t/how-to-keep-streamlit-ag-grid-selected-rows-after-page-update/38611/2
     if return_value['selected_rows']:
+        
         temp = return_value['selected_rows']
+        updateSelected(temp)
         print(return_value['selected_rows'])
         print(temp[0]['Course Code'])
+        selected.append([temp[-1]['Course Code'], temp[-1]['Class'],temp[-1]['Title'],temp[-1]['Days'],temp[-1]['Time'],temp[-1]['Instructor']])
+        print(selected)
+    print(selected)
 
+    if submit:
+        for each in return_value['selected_rows']:
+            print('.')
+    #return selected
+
+def updateSelected(lst):
+    selectedList = pd.DataFrame(lst, columns=['Course Code','Class','Title','Days','Time','Instructor'])
+
+    st.dataframe(selectedList)
+    print('.')
+    #return selected
 
 def parseResults(collection):
     #STREAMLIT: clickable list &
@@ -109,9 +129,6 @@ def parseResults(collection):
     #
     #user select course
 
-def buildDisplay():
-    #STREAMLIT: calendar display
-    print('.')
 
 
 def main():

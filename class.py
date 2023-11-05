@@ -41,38 +41,18 @@ def main():
     collection.insert_many(data)
 
 
+    keyList = ["Dynamic", "fund"] 
+    #vv csv data source file vv
+    regex_patterns = [f".*{keyword}.*" for keyword in keyList]
+
+    filter = {"KeyWords": {"$regex": "|".join(regex_patterns), "$options": "i"}}
+    serached = collection.find(filter)
 
 
-    CRN = 23141
-
-    time_conflict_mapping = [
-    [0],
-    [1, 2, 3],
-    [2, 1, 3, 4],
-    [3, 1, 2, 4],
-    [4, 2, 3],
-    [5, 6],
-    [6, 5, 7],
-    [7, 6, 8],
-    [8, 7],
-    [9],
-    [10]
-    ]
-        
-    filter = {'Course Code': CRN}
-    result = collection.find_one(filter)
-
-    t_slot = result["TimeSlot"]
-    print(t_slot)
-
-    time_slots_to_remove = time_conflict_mapping[t_slot]
-
-    filter = {'TimeSlot': {'$in': time_slots_to_remove}}
-    update = {'$set': {'hidden': True}}
-    collection.update_many(filter, update)
-
-    for document in collection.find():
+    for document in serached:
         print(document)
+
+    print("OOps")
 
     collection.delete_many({})
     client.close()

@@ -10,7 +10,6 @@ from st_aggrid import GridOptionsBuilder
 
 #read all course data from a csv file
 def readCSV(file_path, collection):
-    collection.delete_many({})
 
     df = pd.read_csv(file_path)
 
@@ -40,13 +39,18 @@ def readCSV(file_path, collection):
 def keyWordSearch(collection):
     #STREAMLIT: textbox & enter
     keyWords = st.text_input(label="Keyword Search",placeholder="Enter three keywords")
-    #
-    keyList = list(keyWords.split(" "))
+    if keyWords != None:
+        keyList = list(keyWords.split(" "))
     #vv csv data source file vv
-    filter = {'KeyWords': {'$nin': keyList}}
-    update = {'$set': {'hidden': True}}
-    collection.update_many(filter, update)
+        regex_patterns = [f".*{keyword}.*" for keyword in keyList]
 
+        filter = {"KeyWords": {"$regex": "|".join(regex_patterns), "$options": "i"}}
+        serached = list(collection.find(filter,{ "_id": 0, "Course Code": 1, "Class":1, "Title": 1, "Days" : 1, "Time": 1, "Instructor": 1}))
+        return serached
+    
+    return list()
+    #
+    
 
 
 def update_dataframe(picked_course, collection):
@@ -72,8 +76,7 @@ def update_dataframe(picked_course, collection):
     time_slots_to_remove = time_conflict_mapping[t_slot]
 
     filter = {'TimeSlot': {'$in': time_slots_to_remove}}
-    update = {'$set': {'hidden': True}}
-    collection.update_many(filter, update)
+    collection.delete_many(filter)
 
 
 
@@ -90,6 +93,15 @@ def parseResults(collection):
     return_value = AgGrid(AGlist,built)
     if return_value['selected_rows']:
         print(return_value)
+    
+    #moemen
+    kws = keyWordSearch(collection)
+    if (kws == list()):
+    #vv csv data source file vv
+        st.dataframe(list(collection.find({},{ "_id": 0, "Course Code": 1, "Class":1, "Title": 1, "Days" : 1, "Time": 1, "Instructor": 1})))
+    else:
+        st.dataframe(kws)
+    
     #
     #
     #user select course
@@ -104,9 +116,13 @@ def main():
     client = db.MongoClient(atlas_uri)
     mydb = client['CW']
     collection = mydb['Courses_Keywords']
+    collection.delete_many({})
 
     readCSV("csdata.csv", collection)
     #keyWordSearch(collection)
+    keyList = ["oral"]
+    #vv csv data source file vv
+
     parseResults(collection)
 
     client.close()

@@ -52,7 +52,6 @@ def keyWordSearch(collection):
     return list()
 
 
-
 def update_dataframe(picked_course, collection):
     filter = {'Course Code': picked_course}
     result = collection.find_one(filter)
@@ -96,12 +95,11 @@ def update_dataframe(picked_course, collection):
     collection.delete_many(filter)
 
 
-pickedOut = list()
 
 def display_list(list):
     AGlist = pd.DataFrame(list)
     builder = GridOptionsBuilder.from_dataframe(AGlist)
-    builder.configure_selection(use_checkbox=True)
+    builder.configure_selection('multiple',use_checkbox=True)
     built = builder.build()
     # st.dataframe(AGlist)
     
@@ -109,9 +107,9 @@ def display_list(list):
     print(selected)
     #https://discuss.streamlit.io/t/how-to-keep-streamlit-ag-grid-selected-rows-after-page-update/38611/2
     if return_value['selected_rows']:
-        
+        #pickedOut.append(return_value['selected_rows'])
         temp = return_value['selected_rows']
-        updateSelected(temp)
+        updateSelected(return_value['selected_rows'])
         print(return_value['selected_rows'])
         print(temp[0]['Course Code'])
         selected.append([temp[-1]['Course Code'], temp[-1]['Class'],temp[-1]['Title'],temp[-1]['Days'],temp[-1]['Time'],temp[-1]['Instructor']])
@@ -119,6 +117,8 @@ def display_list(list):
         #print(selected)
         # print(temp[0]['Course Code'])
         update_dataframe(temp[-1]['Course Code'], list)
+
+
     courses = [["23140","CS101.102","Fund Comp Sci I","T R","09:30AM-10:45AM","KEC 119","Kambhampaty K",'12','1','01/25/24-05/09/24'], 
             ["23149","CS360.102","Analysis/Algorithms","M W F",'08:00AM-08:50AM',"KEC 119","Zeller D","12",'0','01/25/24-05/09/24'], 
             ["23145","CS320.102","Software Eng/Desgn","M W F",'01:00PM-01:50PM',"KEC 119","Hake D","10","2","01/25/24-05/09/24"], 
@@ -174,6 +174,9 @@ def main():
     mydb = client['CW']
     collection = mydb['Courses_Keywords']
     collection.delete_many({})
+
+    pickedOut = list()
+
 
     readCSV("csdata.csv", collection)
     #keyWordSearch(collection)

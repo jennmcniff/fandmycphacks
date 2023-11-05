@@ -1,6 +1,8 @@
 import streamlit as st
 import pandas as pd
 import pymongo as db
+from st_aggrid import AgGrid
+from st_aggrid import GridOptionsBuilder
 
 #implementing w/o streamlit, will encorporate streamlit later
 
@@ -78,9 +80,16 @@ def update_dataframe(picked_course, collection):
 def parseResults(collection):
     #STREAMLIT: clickable list &
     st.write('Results:')
-    st.dataframe(list(collection.find({},{ "_id": 0, "Course Code": 1, "Class":1, "Title": 1, "Days" : 1, "Time": 1, "Instructor": 1})))
-\
-    
+    # AgGrid(collection)
+    # df = pd.DataFrame(list(tweets.find()))
+    AGlist = pd.DataFrame(list(collection.find({},{ "_id": 0, "Course Code": 1, "Class":1, "Title": 1, "Days" : 1, "Time": 1, "Instructor": 1})))
+    builder = GridOptionsBuilder.from_dataframe(AGlist)
+    builder.configure_selection('multiple', use_checkbox=True)
+    built = builder.build()
+    # st.dataframe(AGlist)
+    return_value = AgGrid(AGlist,built)
+    if return_value['selected_rows']:
+        print(return_value)
     #
     #
     #user select course

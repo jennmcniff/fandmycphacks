@@ -89,7 +89,8 @@ def display_list(list):
     if return_value['selected_rows']:
         temp = return_value['selected_rows']
         print(return_value['selected_rows'])
-        print(temp[0]['Course Code'])
+        # print(temp[0]['Course Code'])
+        update_dataframe(temp[-1]['Course Code'], list)
 
 
 def parseResults(collection):
@@ -105,6 +106,11 @@ def parseResults(collection):
     else:
         display_list(kws)
     
+    
+    submit = st.button("Submit")
+    if submit:
+        print(".")
+        
     #
     #
     #user select course

@@ -1,14 +1,184 @@
-{"Course Code":23140,"Class":"CS101.102","Title":"Fund Comp Sci I","Credits":3.0,"Type":"LEC","Days":"T R","Time":"09:30AM-10:45AM","Location":"KEC 119","Instructor":"Kambhampaty K","Seats Available":12,"Waitlist":1,"Enrollment Dates":"01\/25\/24-05\/09\/24","TimeSlot":3}
-{"Course Code":23139,"Class":"CS101.101","Title":"Fund Comp Sci I","Credits":3.0,"Type":"LEC","Days":"T R","Time":"11:00AM-12:15PM","Location":"KEC 119","Instructor":"Babcock D","Seats Available":12,"Waitlist":0,"Enrollment Dates":"01\/25\/24-05\/09\/24","TimeSlot":5}
-{"Course Code":23141,"Class":"CS201.101","Title":"Fund Comp Sci II","Credits":3.0,"Type":"LEC","Days":"M W","Time":"09:00AM-10:15AM","Location":"KEC 123","Instructor":"Zeller D","Seats Available":12,"Waitlist":4,"Enrollment Dates":"01\/25\/24-05\/09\/24","TimeSlot":2}
-{"Course Code":23142,"Class":"CS201.102","Title":"Fund Comp Sci II","Credits":3.0,"Type":"LEC","Days":"M W","Time":"11:00AM-12:15PM","Location":"KEC 123","Instructor":"Zeller D","Seats Available":12,"Waitlist":6,"Enrollment Dates":"01\/25\/24-05\/09\/24","TimeSlot":5}
-{"Course Code":23143,"Class":"CS290.101","Title":"Comp Sci Career Train Prep","Credits":1.0,"Type":"LEC","Days":"W","Time":"12:00PM-12:50PM","Location":"CEC 104","Instructor":"Arcieri K","Seats Available":20,"Waitlist":4,"Enrollment Dates":"01\/25\/24-05\/09\/24","TimeSlot":6}
-{"Course Code":23144,"Class":"CS320.101","Title":"Software Eng\/Desgn","Credits":3.0,"Type":"LEC","Days":"M W F","Time":"10:00AM-10:50AM","Location":"KEC 119","Instructor":"Hake D","Seats Available":10,"Waitlist":0,"Enrollment Dates":"01\/25\/24-05\/09\/24","TimeSlot":4}
-{"Course Code":23145,"Class":"CS320.102","Title":"Software Eng\/Desgn","Credits":3.0,"Type":"LEC","Days":"M W F","Time":"01:00PM-01:50PM","Location":"KEC 119","Instructor":"Hake D","Seats Available":10,"Waitlist":2,"Enrollment Dates":"01\/25\/24-05\/09\/24","TimeSlot":8}
-{"Course Code":23146,"Class":"CS320.103","Title":"Software Eng\/Desgn","Credits":3.0,"Type":"LEC","Days":"M W F","Time":"02:00PM-02:50PM","Location":"KEC 119","Instructor":"Zeller D","Seats Available":10,"Waitlist":0,"Enrollment Dates":"01\/25\/24-05\/09\/24","TimeSlot":9}
-{"Course Code":23147,"Class":"CS335.101","Title":"Cybersecurity Analy & Appl","Credits":3.0,"Type":"LEC","Days":"T R","Time":"06:00PM-07:15PM","Location":"KEC 123","Instructor":"Zhelezov G","Seats Available":20,"Waitlist":7,"Enrollment Dates":"01\/25\/24-05\/09\/24","TimeSlot":10}
-{"Course Code":23149,"Class":"CS360.102","Title":"Analysis\/Algorithms","Credits":3.0,"Type":"LEC","Days":"M W F","Time":"08:00AM-08:50AM","Location":"KEC 119","Instructor":"Zeller D","Seats Available":12,"Waitlist":0,"Enrollment Dates":"01\/25\/24-05\/09\/24","TimeSlot":0}
-{"Course Code":23148,"Class":"CS360.101","Title":"Analysis\/Algorithms","Credits":3.0,"Type":"LEC","Days":"M W F","Time":"09:00AM-09:50AM","Location":"KEC 119","Instructor":"Babcock D","Seats Available":12,"Waitlist":0,"Enrollment Dates":"01\/25\/24-05\/09\/24","TimeSlot":1}
-{"Course Code":23150,"Class":"CS402.101","Title":"Capstone Design II","Credits":3.0,"Type":"L\/L","Days":"M W F","Time":"11:00AM-12:15PM","Location":"KEC 118","Instructor":"Babcock D","Seats Available":10,"Waitlist":2,"Enrollment Dates":"01\/25\/24-05\/09\/24","TimeSlot":5}
-{"Course Code":23151,"Class":"CS402.102","Title":"Capstone Design II","Credits":3.0,"Type":"L\/L","Days":"M W F","Time":"11:00AM-12:15PM","Location":"KEC 119","Instructor":"Hake D","Seats Available":10,"Waitlist":7,"Enrollment Dates":"01\/25\/24-05\/09\/24","TimeSlot":5}
-{"Course Code":23152,"Class":"CS497.101","Title":"Special Topics","Credits":3.0,"Type":"LEC","Days":"T R","Time":"12:30PM-01:45PM","Location":"KEC 119","Instructor":"Kambhampaty K","Seats Available":16,"Waitlist":8,"Enrollment Dates":"01\/25\/24-05\/09\/24","TimeSlot":7}
+[
+    {
+        "Course Code": 23140,
+        "Class": "CS101.102",
+        "Title": "Fund Comp Sci I",
+        "Credits": 3.0,
+        "Type": "LEC",
+        "Days": "T R",
+        "Time": "09:30AM-10:45AM",
+        "Location": "KEC 119",
+        "Instructor": "Kambhampaty K",
+        "KeyWords": "Fund Comp Sci I Algorithm design Program construction Procedural constructs Problem analysis Implementation strategies Debugging techniques Programming practices Data structures Variables Arrays Strings Records Pointers Control structures Decisions Iterations Functions File I/O Computer science Engineering C C++ C# Programming experience",
+        "TimeSlot": 3
+    },
+    {
+        "Course Code": 23139,
+        "Class": "CS101.101",
+        "Title": "Fund Comp Sci I",
+        "Credits": 3.0,
+        "Type": "LEC",
+        "Days": "T R",
+        "Time": "11:00AM-12:15PM",
+        "Location": "KEC 119",
+        "Instructor": "Babcock D",
+        "KeyWords": "Fund Comp Sci I Algorithm design Program construction Procedural constructs Problem analysis Implementation strategies Debugging techniques Programming practices Data structures Variables Arrays Strings Records Pointers Control structures Decisions Iterations Functions File I/O Computer science Engineering C C++ C# Programming experience",
+        "TimeSlot": 5
+    },
+    {
+        "Course Code": 23141,
+        "Class": "CS201.101",
+        "Title": "Fund Comp Sci II",
+        "Credits": 3.0,
+        "Type": "LEC",
+        "Days": "M W",
+        "Time": "09:00AM-10:15AM",
+        "Location": "KEC 123",
+        "Instructor": "Zeller D",
+        "KeyWords": "fund comp sci II Advanced object-oriented constructs Abstraction Virtual methods Generic classes Advanced data structures Arrays Linked lists Queues Stacks Trees Heaps Hash tables Standard template libraries Sorting algorithms Searching algorithms Concurrency techniques Parallelism Threads Analytical techniques Proof techniques Computer science Engineering Programming languages C++ C# Java Application development",
+        "TimeSlot": 2
+    },
+    {
+        "Course Code": 23142,
+        "Class": "CS201.102",
+        "Title": "Fund Comp Sci II",
+        "Credits": 3.0,
+        "Type": "LEC",
+        "Days": "M W",
+        "Time": "11:00AM-12:15PM",
+        "Location": "KEC 123",
+        "Instructor": "Zeller D",
+        "KeyWords": "fund comp sci II Advanced object-oriented constructs Abstraction Virtual methods Generic classes Advanced data structures Arrays Linked lists Queues Stacks Trees Heaps Hash tables Standard template libraries Sorting algorithms Searching algorithms Concurrency techniques Parallelism Threads Analytical techniques Proof techniques Computer science Engineering Programming languages C++ C# Java Application development",
+        "TimeSlot": 5
+    },
+    {
+        "Course Code": 23143,
+        "Class": "CS290.101",
+        "Title": "Comp Sci Career Train Prep",
+        "Credits": 1.0,
+        "Type": "LEC",
+        "Days": "W",
+        "Time": "12:00PM-12:50PM",
+        "Location": "CEC 104",
+        "Instructor": "Arcieri K",
+        "KeyWords": "comp sci career train prep Internship preparation Seminar One-credit-hour Employment opportunities Cover letters Resumes Interview skills Mock interviews Human resource managers Ethical issues Computing profession Case studies Role playing Professional development Internship readiness",
+        "TimeSlot": 6
+    },
+    {
+        "Course Code": 23144,
+        "Class": "CS320.101",
+        "Title": "Software Eng/Desgn",
+        "Credits": 3.0,
+        "Type": "LEC",
+        "Days": "M W F",
+        "Time": "10:00AM-10:50AM",
+        "Location": "KEC 119",
+        "Instructor": "Hake D",
+        "KeyWords": "Software Eng/Desgn Software development process Software life cycle Software development models Requirements analysis Software design techniques Structured analysis Object-oriented approaches Software quality assurance Design reviews Testing Metrics Program verification Software project planning Software organization Project management Team programming project Software engineering Software development methodologies Quality control Project management techniques Team collaboration Software development tools Software engineering best practices Project management strategies",
+        "TimeSlot": 4
+    },
+    {
+        "Course Code": 23145,
+        "Class": "CS320.102",
+        "Title": "Software Eng/Desgn",
+        "Credits": 3.0,
+        "Type": "LEC",
+        "Days": "M W F",
+        "Time": "01:00PM-01:50PM",
+        "Location": "KEC 119",
+        "Instructor": "Hake D",
+        "KeyWords": "Software Eng/Desgn Software development process Software life cycle Software development models Requirements analysis Software design techniques Structured analysis Object-oriented approaches Software quality assurance Design reviews Testing Metrics Program verification Software project planning Software organization Project management Team programming project Software engineering Software development methodologies Quality control Project management techniques Team collaboration Software development tools Software engineering best practices Project management strategies",
+        "TimeSlot": 8
+    },
+    {
+        "Course Code": 23146,
+        "Class": "CS320.103",
+        "Title": "Software Eng/Desgn",
+        "Credits": 3.0,
+        "Type": "LEC",
+        "Days": "M W F",
+        "Time": "02:00PM-02:50PM",
+        "Location": "KEC 119",
+        "Instructor": "Zeller D",
+        "KeyWords": "Software Eng/Desgn Software development process Software life cycle Software development models Requirements analysis Software design techniques Structured analysis Object-oriented approaches Software quality assurance Design reviews Testing Metrics Program verification Software project planning Software organization Project management Team programming project Software engineering Software development methodologies Quality control Project management techniques Team collaboration Software development tools Software engineering best practices Project management strategies",
+        "TimeSlot": 9
+    },
+    {
+        "Course Code": 23147,
+        "Class": "CS335.101",
+        "Title": "Cybersecurity Analy & Appl",
+        "Credits": 3.0,
+        "Type": "LEC",
+        "Days": "T R",
+        "Time": "06:00PM-07:15PM",
+        "Location": "KEC 123",
+        "Instructor": "Zhelezov G",
+        "KeyWords": "Cybersecurity Analy & Appl Cybersecurity Security attacks Countermeasures Network security Web security Database security Application security Operating systems security Covert channels Static code analysis Dynamic code analysis Lab exercises Hands-on experience Cross-site scripting (XSS) SQL injection Buffer overflow TCP/IP attacks Web tracking Ethical hacking Security vulnerabilities Cyber threats Risk mitigation Security testing Vulnerability assessment Information security",
+        "TimeSlot": 10
+    },
+    {
+        "Course Code": 23149,
+        "Class": "CS360.102",
+        "Title": "Analysis/Algorithms",
+        "Credits": 3.0,
+        "Type": "LEC",
+        "Days": "M W F",
+        "Time": "08:00AM-08:50AM",
+        "Location": "KEC 119",
+        "Instructor": "Zeller D",
+        "KeyWords": "Analysis/Algorithms Algorithm analysis Algorithm design Fundamental algorithms Graph algorithms Sorting algorithms Searching algorithms Hashing Integer arithmetic Combinatorial tasks Mathematical tools Asymptotic notations Recurrence solving Greedy method Divide-and-conquer Dynamic programming Randomization Computational complexity Algorithmic strategies Problem-solving techniques Mathematical analysis Combinatorial optimization Algorithmic efficiency Data structures Algorithmic paradigms Theoretical computer science",
+        "TimeSlot": 0
+    },
+    {
+        "Course Code": 23148,
+        "Class": "CS360.101",
+        "Title": "Analysis/Algorithms",
+        "Credits": 3.0,
+        "Type": "LEC",
+        "Days": "M W F",
+        "Time": "09:00AM-09:50AM",
+        "Location": "KEC 119",
+        "Instructor": "Babcock D",
+        "KeyWords": "Analysis/Algorithms Algorithm analysis Algorithm design Fundamental algorithms Graph algorithms Sorting algorithms Searching algorithms Hashing Integer arithmetic Combinatorial tasks Mathematical tools Asymptotic notations Recurrence solving Greedy method Divide-and-conquer Dynamic programming Randomization Computational complexity Algorithmic strategies Problem-solving techniques Mathematical analysis Combinatorial optimization Algorithmic efficiency Data structures Algorithmic paradigms Theoretical computer science",
+        "TimeSlot": 1
+    },
+    {
+        "Course Code": 23150,
+        "Class": "CS402.101",
+        "Title": "Capstone Design II",
+        "Credits": 3.0,
+        "Type": "L/L",
+        "Days": "M W F",
+        "Time": "11:00AM-12:15PM",
+        "Location": "KEC 118",
+        "Instructor": "Babcock D",
+        "KeyWords": "Capstone Design II Elective course Computer science majors Student design teams Long-term projects Faculty advisor Project planning Project management Professional technical report Oral presentation Design project Technical and non-technical aspects Deliverable prototype Project continuity Engineering design Problem-solving Team collaboration Project assessment Prototype development Design documentation",
+        "TimeSlot": 5
+    },
+    {
+        "Course Code": 23151,
+        "Class": "CS402.102",
+        "Title": "Capstone Design II",
+        "Credits": 3.0,
+        "Type": "L/L",
+        "Days": "M W F",
+        "Time": "11:00AM-12:15PM",
+        "Location": "KEC 119",
+        "Instructor": "Hake D",
+        "KeyWords": "Capstone Design II Elective course Computer science majors Student design teams Long-term projects Faculty advisor Project planning Project management Professional technical report Oral presentation Design project Technical and non-technical aspects Deliverable prototype Project continuity Engineering design Problem-solving Team collaboration Project assessment Prototype development Design documentation",
+        "TimeSlot": 5
+    },
+    {
+        "Course Code": 23152,
+        "Class": "CS497.101",
+        "Title": "Special Topics",
+        "Credits": 3.0,
+        "Type": "LEC",
+        "Days": "T R",
+        "Time": "12:30PM-01:45PM",
+        "Location": "KEC 119",
+        "Instructor": "Kambhampaty K",
+        "KeyWords": "Special Topics Computer science Upper-level course Computer science majors Rapidly changing field Relevant topics Course design Staff availability Student interest Specialized course Advanced computer science Curriculum adaptation Elective course",
+        "TimeSlot": 7
+    }
+]
